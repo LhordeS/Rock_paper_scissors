@@ -8,16 +8,57 @@ function computerPlay() {
 }
 
 function playRound(playerSelection, computerSelection) {
-    if ((computerSelection === 'Rock' && playerSelection === 'Scissors') || (computerSelection === 'Paper' && playerSelection === 'Rock') || (computerSelection === 'Scissors' && playerSelection === 'Paper')) {
-        return `You lose! ${computerSelection} beats ${playerSelection}`
-    } else if ((playerSelection === 'Rock' && computerSelection === 'Scissors') || (playerSelection === 'Paper' && computerSelection === 'Rock') || (playerSelection === 'Scissors' && computerSelection === 'Paper')) {
-        return `You win! ${playerSelection} beats ${computerSelection}`
-    } else {
-        return "It's a tie! Try again"
+    computerSelection;
+    const result = `Your Score: ${playerScore}
+Computer: ${computerScore}
+
+`;
+    if ((computerSelection == 'Rock' && playerSelection == 'Scissors') || (computerSelection == 'Paper' && playerSelection == 'Rock') || (computerSelection == 'Scissors' && playerSelection == 'Paper')) {
+        computerScore = computerScore + 1;
+        return computerScore;
+    } else if ((computerSelection == 'Rock' && playerSelection == 'Paper') || (computerSelection == 'Paper' && playerSelection == 'Scissors') || (computerSelection == 'Scissors' && playerSelection == 'Rock')) {
+        playerScore = playerScore + 1;
+        return playerScore;
+    } else if ((computerSelection == 'Rock' && playerSelection == 'Rock') || (computerSelection == 'Paper' && playerSelection == 'Paper') || (computerSelection == 'Scissors' && playerSelection == 'Scissors')) {
+        return 'tie';
     }
 }
 
-const playerSelection = 'Rock';
+
+let playerScore = 0;
+let computerScore = 0;
+
 const computerSelection = computerPlay();
-console.log(playerSelection, computerSelection);
-console.log(playRound('Rock', computerPlay()));
+let score = [8, 14];
+
+function game() {
+    for (let i = 0; i < 5; i++){
+        const playerInput = prompt('Enter Rock, Paper, or Scissors');
+        const caps = playerInput.slice(0, 1).toUpperCase();
+        const lower = playerInput.slice(1).toLowerCase();
+        const playerSelection = caps.concat(lower);
+        if (playerSelection !== 'Rock' && playerSelection !== 'Paper' && playerSelection !== 'Scissors') {
+            i--;
+            alert('Invalid input. Try again');
+        }
+    playRound(playerSelection, computerPlay());
+    if (playerScore) {
+        playerScore + 1;
+    } else if (computerScore) {
+        computerScore + 1;
+    }
+    console.log(`Your Score: ${playerScore} Computer Score: ${computerScore}`);
+        
+    }
+}
+
+game();
+
+if (playerScore > computerScore) {
+    alert("You win!");
+    } else if (playerScore < computerScore) {
+        alert('You lose!');
+} else {
+    alert("It's a tie!");
+}
+    
